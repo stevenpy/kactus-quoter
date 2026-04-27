@@ -1,0 +1,37 @@
+<div class="page">
+  <div class="header-row">
+    <h1>Devis</h1>
+    <%= link_to "Nouveau Devis", new_quote_path, class: "button" %>
+  </div>
+
+  <% if @quotes.empty? %>
+    <p>Aucun devis trouvé.</p>
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Statut</th>
+          <th>Créé le</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @quotes.each do |quote| %>
+          <tr>
+            <td><%= quote.name %></td>
+            <td><%= quote.status %></td>
+            <td><%= l quote.created_at, format: :short %></td>
+            <td class="actions-line">
+              <%= link_to "Voir", quote_path(quote) %>
+              <% if quote.editable? %>
+                <%= link_to "Modifier", edit_quote_path(quote) %>
+                <%= button_to "Supprimer", quote_path(quote), method: :delete, form: { data: { turbo_confirm: "Supprimer ce devis ?" } } %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
