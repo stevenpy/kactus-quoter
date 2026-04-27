@@ -35,8 +35,8 @@
             <td><%= item.quantity %></td>
             <td><%= euros_from_cents(item.unit_price_cents) %></td>
             <td><%= number_with_precision(item.vat_rate, precision: 2) %>%</td>
-            <td><%= euros_from_cents(item.subtotal_excl_tax_cents) %></td>
-            <td><%= euros_from_cents(item.total_incl_tax_cents) %></td>
+            <td><%= euros_from_cents(item.subtotal_excl_vat_cents) %></td>
+            <td><%= euros_from_cents(item.total_incl_vat_cents) %></td>
             <td class="actions-line">
               <% if @quote.editable? %>
                 <%= link_to "Modifier", edit_quote_item_path(@quote, item) %>
@@ -51,9 +51,9 @@
 
   <h2>Totaux</h2>
   <ul>
-    <li>Total HT: <strong><%= euros_from_cents(@quote.total_excl_tax_cents) %></strong></li>
+    <li>Total HT: <strong><%= euros_from_cents(@quote.total_excl_vat_cents) %></strong></li>
     <li>Total TVA: <strong><%= euros_from_cents(@quote.total_vat_cents) %></strong></li>
-    <li>Total TTC: <strong><%= euros_from_cents(@quote.total_incl_tax_cents) %></strong></li>
+    <li>Total TTC: <strong><%= euros_from_cents(@quote.total_incl_vat_cents) %></strong></li>
   </ul>
 
   <% if @quote.editable? %>

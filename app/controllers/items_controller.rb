@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_quote
-  before_action :set_item, only: %i[show edit update destroy]
+  before_action :ensure_quote_is_editable
+  before_action :set_item, only: %i[edit update destroy]
 
   def create
     @item = @quote.items.build(item_params)

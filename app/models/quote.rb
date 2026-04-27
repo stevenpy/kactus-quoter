@@ -13,15 +13,15 @@ class Quote < ApplicationRecord
     !validated?
   end
 
-  def total_excl_tax_cents
-    items.sum(&:subtotal_excl_tax_cents)
+  def total_excl_vat_cents
+    items.sum(&:subtotal_excl_vat_cents)
   end
 
   def total_vat_cents
     items.sum(&:vat_amount_cents)
   end
 
-  def total_incl_tax_cents
-    total_excl_tax_cents + total_vat_cents
+  def total_incl_vat_cents
+    total_excl_vat_cents + total_vat_cents
   end
 end

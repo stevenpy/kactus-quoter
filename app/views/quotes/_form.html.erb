@@ -1,7 +1,7 @@
 <%= form_with model: quote do |form| %>
   <% if quote.errors.any? %>
     <div class="error-box">
-      <p><strong><%= pluralize(quote.errors.count, "error") %> prevented this quote from being saved:</strong></p>
+      <p><strong><%= pluralize(quote.errors.count, "erreur") %> a empêché le devis d'être enregistré :</strong></p>
       <ul>
         <% quote.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,12 +11,12 @@
   <% end %>
 
   <div class="field-row">
-    <%= form.label :name %>
+    <%= form.label :name, "Nom" %>
     <%= form.text_field :name, required: true %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
-    <%= link_to "Cancel", quote.persisted? ? quote_path(quote) : quotes_path %>
+    <%= form.submit "Enregistrer" %>
+    <%= link_to "Annuler", quote.persisted? ? quote_path(quote) : quotes_path %>
   </div>
 <% end %>
