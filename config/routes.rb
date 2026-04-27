@@ -16,6 +16,6 @@ Rails.application.routes.draw do
     member do
       patch :validate
     end
-    resources :items
+    resources :items, only: %i[create edit update destroy]
   end
 end
