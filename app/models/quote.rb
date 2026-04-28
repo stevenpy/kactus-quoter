@@ -5,6 +5,8 @@ class Quote < ApplicationRecord
 
   validates :name, presence: true
 
+  scope :recent_first, -> { order(created_at: :desc) }
+
   def mark_as_validated!
     update!(status: :validated, validated_at: Time.current)
   end

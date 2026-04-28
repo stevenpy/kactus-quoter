@@ -3,7 +3,7 @@ class QuotesController < ApplicationController
   before_action :ensure_quote_is_editable, only: %i[edit update destroy]
 
   def index
-    @quotes = Quote.all
+    @quotes = Quote.recent_first
   end
 
   def show
