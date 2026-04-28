@@ -62,10 +62,4 @@ class QuotesController < ApplicationController
   def quote_params
     params.require(:quote).permit(:name)
   end
-
-  def ensure_quote_is_editable
-    return if @quote.editable?
-
-    redirect_to quote_path(@quote), notice: "Devis non modifiable car déjà validé"
-  end
 end

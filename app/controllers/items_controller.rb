@@ -44,10 +44,4 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :quantity, :unit_price_cents, :vat_rate)
   end
-
-  def ensure_quote_is_editable
-    return if @quote.editable?
-
-    redirect_to quote_path(@quote), notice: "Article non modifiable car devis déjà validé"
-  end
 end
