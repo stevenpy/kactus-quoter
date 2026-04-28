@@ -13,52 +13,16 @@
   <p><strong>Statut:</strong> <%= @quote.status %></p>
 
   <h2>Articles</h2>
-  <% if @quote.items.empty? %>
-    <p>Aucun article trouvé.</p>
-  <% else %>
-    <table>
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Quantité</th>
-          <th>Prix unitaire (HT)</th>
-          <th>Taux de TVA</th>
-          <th>Total HT</th>
-          <th>Total TTC</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @items.each do |item| %>
-          <tr>
-            <td><%= item.name %></td>
-            <td><%= item.quantity %></td>
-            <td><%= euros_from_cents(item.unit_price_cents) %></td>
-            <td><%= number_with_precision(item.vat_rate, precision: 2) %>%</td>
-            <td><%= euros_from_cents(item.subtotal_excl_vat_cents) %></td>
-            <td><%= euros_from_cents(item.total_incl_vat_cents) %></td>
-            <td class="actions-line">
-              <% if @quote.editable? %>
-                <%= link_to "Modifier", edit_quote_item_path(@quote, item) %>
-                <%= button_to "Supprimer", quote_item_path(@quote, item), method: :delete, form: { data: { turbo_confirm: "Supprimer cet article ?" } } %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% end %>
+  <%= render "items/list", quote: @quote, items: @items %>
 
   <h2>Totaux</h2>
-  <ul>
-    <li>Total HT: <strong><%= euros_from_cents(@quote.total_excl_vat_cents) %></strong></li>
-    <li>Total TVA: <strong><%= euros_from_cents(@quote.total_vat_cents) %></strong></li>
-    <li>Total TTC: <strong><%= euros_from_cents(@quote.total_incl_vat_cents) %></strong></li>
-  </ul>
+  <%= render "totals", quote: @quote %>
 
   <% if @quote.editable? %>
     <h2>Ajouter un article</h2>
-    <%= render "items/form", quote: @quote, item: @item %>
+    <%= turbo_frame_tag "new_item" do %>
+      <%= render "items/form", quote: @quote, item: @item %>
+    <% end %>
   <% else %>
     <p>Ce devis est validé et en lecture seule.</p>
   <% end %>

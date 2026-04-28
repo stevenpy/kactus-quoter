@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "items", partial: "items/list", locals: { quote: @quote, items: @items } %>
+<%= turbo_stream.replace "totals", partial: "quotes/totals", locals: { quote: @quote } %>

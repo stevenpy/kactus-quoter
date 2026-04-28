@@ -1,0 +1,21 @@
+<%= turbo_frame_tag "items" do %>
+  <% if items.empty? %>
+    <p>Aucun article trouvé.</p>
+  <% else %>
+    <div class="items-list">
+      <div class="item-row item-row-header">
+        <span>Nom</span>
+        <span>Quantité</span>
+        <span>Prix unitaire (HT)</span>
+        <span>Taux de TVA</span>
+        <span>Total HT</span>
+        <span>Total TTC</span>
+        <span></span>
+      </div>
+
+      <% items.each do |item| %>
+        <%= render "items/item", quote: quote, item: item %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

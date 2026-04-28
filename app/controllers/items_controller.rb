@@ -7,8 +7,14 @@ class ItemsController < ApplicationController
     @item = @quote.items.build(item_params)
 
     if @item.save
-      redirect_to quote_path(@quote), notice: "Article ajouté avec succès"
+      prepare_quote_rendering
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to quote_path(@quote), notice: "Article ajouté avec succès" }
+      end
     else
+      @items = @quote.items.order(created_at: :asc)
       render "quotes/show", status: :unprocessable_entity
     end
   end
@@ -18,7 +24,12 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to quote_path(@quote), notice: "Article mis à jour avec succès"
+      prepare_quote_rendering
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to quote_path(@quote), notice: "Article mis à jour avec succès" }
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -26,7 +37,12 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to quote_path(@quote), notice: "Article supprimé avec succès"
+    prepare_quote_rendering
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to quote_path(@quote), notice: "Article supprimé avec succès" }
+    end
   end
 
   private
@@ -43,5 +59,11 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :quantity, :unit_price_cents, :vat_rate)
+  end
+
+  def prepare_quote_rendering
+    @quote.reload
+    @items = @quote.items.order(created_at: :asc)
+    @new_item = Item.new(quote: @quote)
   end
 end

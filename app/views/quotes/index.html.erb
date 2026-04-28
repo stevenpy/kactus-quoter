@@ -1,6 +1,6 @@
 <div class="page">
   <div class="header-row">
-    <h1>Devis</h1>
+    <h1>Mes Devis</h1>
     <%= link_to "Nouveau Devis", new_quote_path, class: "button" %>
   </div>
 
@@ -21,7 +21,7 @@
           <tr>
             <td><%= quote.name %></td>
             <td><%= quote.status %></td>
-            <td><%= l quote.created_at, format: :short %></td>
+            <td><%= localize quote.created_at, format: :short %></td>
             <td class="actions-line">
               <%= link_to "Voir", quote_path(quote) %>
               <% if quote.editable? %>

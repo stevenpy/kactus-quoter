@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "items", partial: "items/list", locals: { quote: @quote, items: @items } %>
+<%= turbo_stream.replace "totals", partial: "quotes/totals", locals: { quote: @quote } %>
+<%= turbo_stream.replace "new_item" do %>
+  <%= turbo_frame_tag "new_item" do %>
+    <%= render "items/form", quote: @quote, item: @new_item %>
+  <% end %>
+<% end %>

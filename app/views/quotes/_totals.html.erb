@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "totals" do %>
+  <ul>
+    <li>Total HT: <strong><%= euros_from_cents(quote.total_excl_vat_cents) %></strong></li>
+    <li>Total TVA: <strong><%= euros_from_cents(quote.total_vat_cents) %></strong></li>
+    <li>Total TTC: <strong><%= euros_from_cents(quote.total_incl_vat_cents) %></strong></li>
+  </ul>
+<% end %>
