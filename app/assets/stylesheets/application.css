@@ -9,6 +9,12 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+.actions-line {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .items-list {
   display: grid;
   gap: 0.5rem;
@@ -16,7 +22,7 @@
 
 .item-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr 1fr 1.5fr 1.5fr 1.5fr;
+  grid-template-columns: 2fr 0.75fr 1.25fr 1fr 1.25fr 1.25fr 1.5fr;
   gap: 1rem;
   align-items: center;
   padding: 0.75rem;
@@ -26,4 +32,25 @@
 .item-row-header {
   font-weight: 700;
   background: #f7f7f7;
+}
+
+.item-form {
+  display: block;
+}
+
+.item-form-row {
+  display: grid;
+  grid-template-columns: 2fr 0.75fr 1.25fr 1fr 1.25fr 1.25fr 1.5fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+}
+
+.item-form-row input {
+  width: 100%;
+}
+
+.item-form-total {
+  font-weight: 700;
 }
