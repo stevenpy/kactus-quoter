@@ -23,7 +23,5 @@
     <%= turbo_frame_tag "new_item" do %>
       <%= render "items/form", quote: @quote, item: @item %>
     <% end %>
-  <% else %>
-    <p>Ce devis est validé et en lecture seule.</p>
   <% end %>
 </div>

@@ -23,10 +23,11 @@
             <td><%= quote.status %></td>
             <td><%= localize quote.created_at, format: :short %></td>
             <td class="actions-line">
-              <%= link_to "Voir", quote_path(quote) %>
               <% if quote.editable? %>
-                <%= link_to "Modifier", edit_quote_path(quote) %>
+                <%= link_to "Modifier", quote_path(quote) %>
                 <%= button_to "Supprimer", quote_path(quote), method: :delete, form: { data: { turbo_confirm: "Supprimer ce devis ?" } } %>
+              <% else %>
+                <%= link_to "Afficher", quote_path(quote) %>
               <% end %>
             </td>
           </tr>
