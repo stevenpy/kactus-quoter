@@ -55,6 +55,8 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = @quote.items.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to quote_path(@quote), alert: "Article non trouvé"
   end
 
   def item_params
