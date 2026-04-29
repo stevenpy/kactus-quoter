@@ -1,10 +1,9 @@
 <div class="page">
   <div class="header-row">
-    <h1><%= @quote.name %></h1>
+    <%= render "name", quote: @quote %>
     <div class="actions-line">
       <%= link_to "Retour aux devis", quotes_path %>
       <% if @quote.editable? %>
-        <%= link_to "Modifier le devis", edit_quote_path(@quote) %>
         <%= button_to "Valider le devis", validate_quote_path(@quote), method: :patch, form: { data: { turbo_confirm: "Valider ce devis ? Cette action est irréversible." } } %>
       <% end %>
     </div>

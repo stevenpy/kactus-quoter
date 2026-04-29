@@ -15,6 +15,12 @@
   align-items: center;
 }
 
+.quote-name {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 .items-list {
   display: grid;
   gap: 0.5rem;

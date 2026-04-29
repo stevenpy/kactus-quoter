@@ -1,0 +1,8 @@
+<%= turbo_frame_tag dom_id(quote, :name) do %>
+  <div class="quote-name">
+    <h1><%= quote.name %></h1>
+    <% if quote.editable? %>
+      <%= link_to "Modifier le nom", edit_quote_path(quote), data: { turbo_frame: dom_id(quote, :name) } %>
+    <% end %>
+  </div>
+<% end %>

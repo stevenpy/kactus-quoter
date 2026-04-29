@@ -28,7 +28,10 @@ class QuotesController < ApplicationController
 
   def update
     if @quote.update(quote_params)
-      redirect_to quote_path(@quote), notice: "Devis mis à jour avec succès"
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to quote_path(@quote), notice: "Devis mis à jour avec succès" }
+      end
     else
       render :edit, status: :unprocessable_entity
     end
