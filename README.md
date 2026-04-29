@@ -107,6 +107,19 @@ Run only controller tests:
 bin/rails test test/controllers
 ```
 
+## Code Quality
+
+Run RuboCop:
+
+```bash
+bin/rubocop
+```
+
+Run Brakeman:
+
+```bash
+bin/brakeman
+```
 
 ## Implementation Notes
 
