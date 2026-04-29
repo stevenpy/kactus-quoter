@@ -141,7 +141,7 @@ The controller `item_preview_controller.js` listens to changes on:
 - unit price excluding VAT
 - VAT rate
 
-It then recelculates:
+It then recalculates:
 
 - item total excluding VAT
 - item total including VAT
