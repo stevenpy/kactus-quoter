@@ -1,4 +1,4 @@
-<%= form_with model: [quote, item], class: "item-form" do |form| %>
+<%= form_with model: [quote, item], class: "item-form", data: { controller: "item-preview" } do |form| %>
   <% if item.errors.any? %>
     <div class="error-box">
       <p><strong><%= pluralize(item.errors.count, "erreur") %> a empêché l'article d'être enregistré :</strong></p>
@@ -12,13 +12,13 @@
 
   <div class="item-form-row">
     <%= form.text_field :name, required: true, placeholder: "Titre de l'article" %>
-    <%= form.number_field :quantity, min: 1, step: 1, required: true, placeholder: "Quantité" %>
-    <%= form.number_field :unit_price_cents, min: 0, step: 1, required: true, placeholder: "Montant" %>
-    <%= form.number_field :vat_rate, min: 0, max: 100, step: 0.01, required: true, placeholder: "TVA" %>
-    <span class="item-form-total">
+    <%= form.number_field :quantity, min: 1, step: 1, required: true, placeholder: "Quantité", data: { item_preview_target: "quantity", action: "input->item-preview#recalculate" } %>
+    <%= form.number_field :unit_price_cents, min: 0, step: 1, required: true, placeholder: "Montant", data: { item_preview_target: "unitPrice", action: "input->item-preview#recalculate" } %>
+    <%= form.number_field :vat_rate, min: 0, max: 100, step: 0.01, required: true, placeholder: "TVA", data: { item_preview_target: "vatRate", action: "input->item-preview#recalculate" } %>
+    <span class="item-form-total" data-item-preview-target="subtotal">
       <%= item.persisted? ? euros_from_cents(item.subtotal_excl_vat_cents) : "Total HT" %>
     </span>
-    <span class="item-form-total">
+    <span class="item-form-total" data-item-preview-target="total">
       <%= item.persisted? ? euros_from_cents(item.total_incl_vat_cents) : "Total TTC" %>
     </span>
     <span class="actions-line">
