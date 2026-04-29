@@ -6,6 +6,7 @@ class Item < ApplicationRecord
   validates :unit_price_cents, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :vat_rate, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
   validate :quote_must_be_editable
+  before_destroy :prevent_destroy_when_validated
 
   def subtotal_excl_vat_cents
     quantity * unit_price_cents
@@ -25,5 +26,12 @@ class Item < ApplicationRecord
     return if quote.editable?
 
     errors.add(:base, "Changement impossible sur un devis validé")
+  end
+
+  def prevent_destroy_when_validated
+    return if quote.editable?
+
+    errors.add(:base, "Article non supprimable car devis déjà validé")
+    throw :abort
   end
 end
