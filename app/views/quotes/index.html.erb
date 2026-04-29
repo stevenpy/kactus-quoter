@@ -5,33 +5,30 @@
   <% if @quotes.empty? %>
     <p>Aucun devis trouvé.</p>
   <% else %>
-    <table>
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Statut</th>
-          <th>Créé le</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @quotes.each do |quote| %>
-          <tr>
-            <td><%= quote.name %></td>
-            <td><%= quote.status %></td>
-            <td><%= localize quote.created_at, format: :short %></td>
-            <td class="actions-line">
-              <% if quote.editable? %>
-                <%= link_to "Modifier", quote_path(quote) %>
-                <%= button_to "Supprimer", quote_path(quote), method: :delete, form: { data: { turbo_confirm: "Supprimer ce devis ?" } } %>
-              <% else %>
-                <%= link_to "Afficher", quote_path(quote) %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="quotes-list">
+      <div class="quote-row quote-row-header">
+        <span>ID</span>
+        <span>Date</span>
+        <span>Nom</span>
+        <span></span>
+      </div>
+
+      <% @quotes.each do |quote| %>
+        <div class="quote-row">
+          <span><%= quote.id %></span>
+          <span><%= localize quote.created_at, format: :short %></span>
+          <span><%= quote.name %></span>
+          <span class="actions-line">
+            <% if quote.editable? %>
+              <%= link_to "Editer", quote_path(quote) %>
+              <%= button_to "Supprimer", quote_path(quote), method: :delete, form: { data: { turbo_confirm: "Supprimer ce devis ?" } } %>
+            <% else %>
+              <%= link_to "Afficher", quote_path(quote) %>
+            <% end %>
+          </span>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 
   <h2>Ajouter un devis</h2>
