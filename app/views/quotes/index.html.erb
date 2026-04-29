@@ -1,9 +1,7 @@
 <div class="page">
   <div class="header-row">
     <h1>Mes Devis</h1>
-    <%= link_to "Nouveau Devis", new_quote_path, class: "button" %>
   </div>
-
   <% if @quotes.empty? %>
     <p>Aucun devis trouvé.</p>
   <% else %>
@@ -35,4 +33,7 @@
       </tbody>
     </table>
   <% end %>
+  
+  <h2>Ajouter un devis</h2>
+  <%= render "form", quote: @quote %>
 </div>

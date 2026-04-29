@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "quotes#index"
 
-  resources :quotes do
+  resources :quotes, except: %i[new] do
     member do
       patch :validate
     end

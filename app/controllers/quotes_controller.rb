@@ -4,15 +4,12 @@ class QuotesController < ApplicationController
 
   def index
     @quotes = Quote.recent_first
+    @quote = Quote.new
   end
 
   def show
     @items = @quote.items.order(created_at: :asc)
     @item = Item.new(quote: @quote)
-  end
-
-  def new
-    @quote = Quote.new
   end
 
   def create
@@ -21,7 +18,8 @@ class QuotesController < ApplicationController
     if @quote.save
       redirect_to quote_path(@quote), notice: "Devis crée avec succès"
     else
-      render :new, status: :unprocessable_entity
+      @quotes = Quote.recent_first
+      render :index, status: :unprocessable_entity
     end
   end
 
