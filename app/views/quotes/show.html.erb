@@ -1,12 +1,9 @@
 <div class="page">
   <div class="header-row">
-    <%= render "name", quote: @quote %>
     <div class="actions-line">
       <%= link_to "Retour aux devis", quotes_path %>
-      <% if @quote.editable? %>
-        <%= button_to "Valider le devis", validate_quote_path(@quote), method: :patch, form: { data: { turbo_confirm: "Valider ce devis ? Cette action est irréversible." } } %>
-      <% end %>
     </div>
+    <%= render "name", quote: @quote %>
   </div>
 
   <p><strong>Statut:</strong> <%= @quote.status %></p>
@@ -14,13 +11,17 @@
   <h2>Articles</h2>
   <%= render "items/list", quote: @quote, items: @items %>
 
-  <h2>Totaux</h2>
-  <%= render "totals", quote: @quote %>
-
   <% if @quote.editable? %>
-    <h2>Ajouter un article</h2>
+    <h4>Ajouter un article</h4>
     <%= turbo_frame_tag "new_item" do %>
       <%= render "items/form", quote: @quote, item: @item %>
     <% end %>
   <% end %>
+
+  <div class="quote-summary">
+    <%= render "totals", quote: @quote %>
+    <% if @quote.editable? %>
+      <%= button_to "Valider le devis", validate_quote_path(@quote), method: :patch, form: { data: { turbo_confirm: "Valider ce devis ? Cette action est irréversible." } } %>
+    <% end %>
+  </div>
 </div>
