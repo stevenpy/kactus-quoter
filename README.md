@@ -151,6 +151,7 @@ This preview is only an UX improvement. The server-side model methods remain the
 ## Next Improvements
 
 - Add concurrency safeguards around the quote validation and item mutations. In a production context, two requests can try to edit, delete, or validate the same quote at the same time. I would handle this with row-level locking, for example using `with_lock` around critical operations such as quote validation or item creation/update/deletion to ensure the quote is still editable at the exact moment the mutation is persisted.
+- Extract pricing and tax calculations into dedicated domain objects or services if the rules become more complex. 
 
 - Add a small amount of system coverage for the full browser flow.
 - Improve the design while keeping the UI simple.
